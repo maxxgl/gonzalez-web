@@ -1,0 +1,18 @@
+html {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: navy;
+}
+
+body {
+    max-width: 40em;
+    margin: auto;
+    text-align: center;
+}
+
+* {
+    margin: 1em;
+}

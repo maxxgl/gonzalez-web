@@ -1,9 +1,22 @@
 <html>
-  <title>Gonzalez App</title>
+  <head>
+    <title>Gonzalez App</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
   <body>
     <h1>It's Working</h1>
     <main>
-      <p>This is the Gonzalez App</p>
+      <div>
+        User: <span id="user"></span>
+      </div>
+      <div>
+        Speed: <span id="speed"></span>
+      </div>
+      <div>
+        Time: <span id="time"></span>
+      </div>
+      <button onclick="populate()">Populate</button>
     </main>
   </body>
+  <script src="main.js"></script>
 </html>
