@@ -12,4 +12,29 @@ async function populate() {
   time.innerHTML = data.unit.$date
 }
 
-setInterval(populate, 1000)
+function success(pos) {
+  console.log(pos)
+  const el = document.getElementById('positions')
+  const node = document.createElement("div")
+  node.innerHTML = `
+    <div class="flex position">
+      <div>
+        <div>Latitude: ${pos.coords.latitude}</div>
+        <div>Longitude: ${pos.coords.longitude}</div>
+        <div>Speed: ${pos.coords.speed}</div>
+      </div>
+      <div>
+        <div>Accuracy: ${pos.coords.accuracy}</div>
+        <div>Timestamp: ${pos.timestamp}</div>
+        <div>Heading: ${pos.heading}</div>
+      </div>
+    </div>
+  `
+  el.prepend(node)
+}
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+}
+
+navigator.geolocation.watchPosition(success, error)

@@ -5,18 +5,25 @@
   </head>
   <body>
     <h1>It's Working</h1>
-    <main>
+    <main class="flex">
       <div>
-        User: <span id="user"></span>
+        <div>
+          User: <span id="user"></span>
+        </div>
+        <div>
+          Speed: <span id="speed"></span>
+        </div>
+        <div>
+          Time: <span id="time"></span>
+        </div>  
       </div>
       <div>
-        Speed: <span id="speed"></span>
+        <button class="right" onclick="populate()">
+          Populate
+        </button>  
       </div>
-      <div>
-        Time: <span id="time"></span>
-      </div>
-      <button onclick="populate()">Populate</button>
     </main>
+    <div id="positions"></div>
   </body>
   <script src="main.js"></script>
 </html>
