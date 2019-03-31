@@ -54,7 +54,7 @@ export default class App extends Component {
       return <div>Loading...</div>
     }
 
-    const clientSpeed = Math.floor(speed || 0)
+    const clientSpeed = (speed || 0).toFixed(1)
 
     return (
       <div className="App">
