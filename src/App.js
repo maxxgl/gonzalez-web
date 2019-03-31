@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Settings from './Settings'
 import Map from './Map'
 
 export default class App extends Component {
@@ -10,6 +11,9 @@ export default class App extends Component {
     currentSpeed: 0,
     freeFlowSpeed: 0,
     positions: [],
+    style: 'absolute',
+    zoom: 10,
+    thickness: 10,
   }
 
   componentDidMount() {
@@ -26,10 +30,11 @@ export default class App extends Component {
 
   getRouteData = async () => {
     const { latitude, longitude } = this.state
-    let url = new URL("https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json")
+    let url = new URL(`https://api.tomtom.com/traffic/services/4/flowSegmentData/${this.state.style}/${this.state.zoom}/json`)
     let params = {
       point: `${latitude},${longitude}`,
       unit: "KMPH",
+      thickness: this.state.thickness,
       key: "tRlSZmuvt4DL39zFXSnxEIYGunG3z89u",
     }
     Object.keys(params)
@@ -45,9 +50,18 @@ export default class App extends Component {
     })
   }
 
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
+
   render() {
     const {
-      latitude, longitude, currentSpeed, freeFlowSpeed, speed
+      latitude,
+      longitude,
+      currentSpeed,
+      freeFlowSpeed,
+      speed,
+      style,
+      zoom,
+      thickness,
     } = this.state
 
     if (!latitude || !longitude) {
@@ -60,6 +74,12 @@ export default class App extends Component {
       <div className="App">
         <header>
           <h1>Traffic Flow Optimizer</h1>
+          <Settings
+            style={style}
+            zoom={zoom}
+            thickness={thickness}
+            change={this.handleChange}
+          />
         </header>
         <main>
           <div className="traffic-data">
@@ -67,7 +87,9 @@ export default class App extends Component {
             <div>Freeflow Speed: {freeFlowSpeed}</div>
             <div>Device Speed: {clientSpeed}</div>
             <div>Time: {getTime()}</div>
-            <button onClick={this.getRouteData}>Get Traffic Data</button>
+            <button className="btn btn-float" onClick={this.getRouteData}>
+              Get Traffic Data
+            </button>
           </div>
           <Map
             latitude={latitude}
