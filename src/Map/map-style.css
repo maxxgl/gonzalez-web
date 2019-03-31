@@ -1,0 +1,18 @@
+.map-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em;
+}
+
+.position-marker {
+    color: red;
+}
+
+.map-marker {
+    border-radius: 2em;
+    background-color: navy;
+    color: white;
+    font-weight: bolder;
+    padding: .25em .5em;
+}
