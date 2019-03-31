@@ -54,6 +54,8 @@ export default class App extends Component {
       return <div>Loading...</div>
     }
 
+    const clientSpeed = Math.floor(speed || 0)
+
     return (
       <div className="App">
         <header>
@@ -63,7 +65,7 @@ export default class App extends Component {
           <div className="traffic-data">
             <div>Current Speed: {currentSpeed}</div>
             <div>Freeflow Speed: {freeFlowSpeed}</div>
-            <div>Device Speed: {speed || "n/a"}</div>
+            <div>Device Speed: {clientSpeed}</div>
             <div>Time: {getTime()}</div>
             <button onClick={this.getRouteData}>Get Traffic Data</button>
           </div>
