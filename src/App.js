@@ -40,8 +40,19 @@ export default class App extends Component {
     Object.keys(params)
       .forEach(key => url.searchParams.append(key, params[key]))
 
-    const response = await fetch(url)
-    const data = await response.json()
+    let data = {}
+    try {
+      const response = await fetch(url)
+      data = await response.json()
+    } catch(err) {
+      alert(err);
+      return
+    }
+    if (!data.flowSegmentData) {
+      alert("Request Error", data)
+      return
+    }
+
     console.log(data)
     this.setState({
       currentSpeed: data.flowSegmentData.currentSpeed,
