@@ -1,0 +1,31 @@
+.traffic-data {
+    font-size: 1.5em;
+    background-color: #fdf6e3;
+    padding: 1em;
+    color: black;
+    margin-bottom: 1em;
+}
+
+.data-box {
+    margin-bottom: .5em;
+}
+
+#positions {
+    background-color: lightgrey;
+    padding: .5em;
+}
+
+.position {
+    background-color: white;
+    border-radius: .5em;
+    padding: .5em;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-content {
+    font-size: 1.25em;
+}
