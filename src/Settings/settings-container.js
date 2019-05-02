@@ -12,6 +12,7 @@ export default class ExampleApp extends Component {
         <button
           className="btn btn-small"
           onClick={this.toggleModal}
+          style={{ float: 'right' }}
         >
           Ø
         </button>
