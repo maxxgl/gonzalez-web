@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './traffic-style.css';
+import { Context } from '../global-context';
 import Settings from '../Settings'
 import Map from '../Map'
 
 export default class Traffic extends Component {
+  static contextType = Context
   state = {
-    latitude: null,
-    longitude: null,
-    speed: 0,
     currentSpeed: 0,
     freeFlowSpeed: 0,
     positions: [],
@@ -16,20 +15,8 @@ export default class Traffic extends Component {
     thickness: 10,
   }
 
-  componentDidMount() {
-    let options = { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
-    navigator.geolocation.watchPosition(this.watcher, this.alertError, options);
-  }
-
-  watcher = lastPosition => this.setState({ 
-    latitude: lastPosition.coords.latitude,
-    longitude: lastPosition.coords.longitude,
-    speed: lastPosition.coords.speed,
-  })
-  alertError = err => alert(JSON.stringify(err));
-
   getRouteData = async () => {
-    const { latitude, longitude } = this.state
+    const { latitude, longitude } = this.context
     let url = new URL(`https://api.tomtom.com/traffic/services/4/flowSegmentData/${this.state.style}/${this.state.zoom}/json`)
     let params = {
       point: `${latitude},${longitude}`,
@@ -64,12 +51,10 @@ export default class Traffic extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
   render() {
+    const { latitude, longitude, speed } = this.context
     const {
-      latitude,
-      longitude,
       currentSpeed,
       freeFlowSpeed,
-      speed,
       style,
       zoom,
       thickness,
