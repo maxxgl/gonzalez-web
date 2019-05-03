@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import ContextProvider from './global-context';
 
 const Root = () => (
   <ContextProvider>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </ContextProvider>
 )
 
