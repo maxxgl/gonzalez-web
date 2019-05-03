@@ -5,7 +5,6 @@ export default class Movement extends React.Component {
   static contextType = Context
 
   render() {
-    console.log(this.context)
     return (
       <div>
         <div>x: {this.context.acceleration.x}</div>

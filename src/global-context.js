@@ -12,8 +12,8 @@ export default class ContextProvider extends React.Component {
       y: 0,
       z: 0,
     },
-    interval: 0,
-    role: localStorage.getItem('currentRole'),
+    // interval: 0,
+    // role: localStorage.getItem('currentRole'),
   }
 
   componentDidMount() {
@@ -29,7 +29,10 @@ export default class ContextProvider extends React.Component {
     speed: lastPosition.coords.speed,
   })
 
-  handleDeviceMotion = event => this.setState({ ...event })
+  handleDeviceMotion = event => {
+    const a = event.accelerationIncludingGravity
+    this.setState({ acceleration: { x: a.x, y: a.y, z: a.z } })
+  }
 
   render() {
     return (
