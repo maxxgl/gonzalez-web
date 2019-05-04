@@ -23,10 +23,10 @@ const Chart = ({ data }) => (
   <ResponsiveLine
     data={data}
     margin={{
-      "top": 50,
-      "right": 110,
+      "top": 25,
       "bottom": 50,
-      "left": 60
+      "left": 60,
+      "right": 30,
     }}
     xScale={{
       "type": "point"
