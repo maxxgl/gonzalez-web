@@ -51,7 +51,7 @@ export default class ContextProvider extends React.Component {
   handleDeviceMotion = e => {
     const data = Object.assign({}, this.state.kurt)
     const out = kurt(e.accelerationIncludingGravity, e.timeStamp, data)
-    Object.keys(out).map(k => {
+    for (let k of Object.keys(out)) {
       const newEntry = { x: e.timeStamp, y: out[k] }
       if (data[k]) {
         if (data[k].data.length > 50) {
@@ -63,7 +63,8 @@ export default class ContextProvider extends React.Component {
       } else {
         data[k] = { id: k, data: [newEntry], color: 'red' }
       }
-    })
+    }
+
     this.setState({ kurt: data })
   }
 
