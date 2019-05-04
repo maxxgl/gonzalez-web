@@ -33,8 +33,8 @@ const Chart = ({ data }) => (
     }}
     yScale={{
       "type": "linear",
-      "min": "auto",
-      "max": "auto"
+      "min": 15,
+      "max": -15,
     }}
     axisTop={null}
     axisRight={null}
@@ -43,7 +43,7 @@ const Chart = ({ data }) => (
       "tickSize": 5,
       "tickPadding": 5,
       "tickRotation": 0,
-      "legend": "transportation",
+      "legend": "time",
       "legendOffset": 36,
       "legendPosition": "middle"
     }}
@@ -57,13 +57,10 @@ const Chart = ({ data }) => (
       "legendPosition": "middle"
     }}
     colors={{ "scheme": "nivo" }}
-    dotSize={10}
+    dotSize={1}
     dotColor={{ "theme": "background" }}
     dotBorderWidth={2}
     dotBorderColor={{ "from": "color" }}
-    enableDotLabel={true}
-    dotLabel="y"
-    dotLabelYOffset={-12}
     animate={true}
     motionStiffness={90}
     motionDamping={15}
