@@ -10,7 +10,7 @@ export default class Movement extends React.Component {
     const arr = Object.values(kurt)
     return (
       <div>
-        {arr.map(d => <div key={d.id}>{d.id}: {d.data[0].y}</div>)}
+        {arr.map(d => <div key={d.id}>{d.id}: {d.data[d.data.length - 1].y}</div>)}
         <div style={{ height: '70vh' }}>
           <Chart data={arr} />
         </div>
