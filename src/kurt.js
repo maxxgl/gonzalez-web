@@ -1,9 +1,9 @@
-export default function(motion, timestamp, data) {
-  let result1 = motion.x
-  let result2 = motion.y
-  let result3 = motion.z
+export default function(accel, timestamp, data) {
+//accel.x... are defined
 
-  // TODO: Stuff
+  let orthog = Math.pow((Math.pow(accel.x, 2) + Math.pow(accel.y, 2) + Math.pow(accel.y, 2)) , 0.5)
+  
 
-  return { result1, result2, result3 }
+  return { x: accel.x, y: accel.y, z: accel.z, orthog: orthog }
+
 }
