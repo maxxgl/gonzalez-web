@@ -5,16 +5,5 @@ export default function(motion, timestamp, data) {
 
   // TODO: Stuff
 
-  return [
-    {
-      id: 'Orthogonal Motion',
-      data: [
-        {
-          x: '12',
-          y: result1,
-        }
-      ],
-      color: 'red',
-    }
-  ]
+  return { result1, result2, result3 }
 }
