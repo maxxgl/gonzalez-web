@@ -1,9 +1,20 @@
-export default function(xacc, yacc, zacc) {
-  let result1 = xacc
-  let result2 = yacc
-  let result3 = zacc
+export default function(motion, timestamp, data) {
+  let result1 = motion.x
+  let result2 = motion.y
+  let result3 = motion.z
 
   // TODO: Stuff
 
-  return { result1, result2, result3 }
+  return [
+    {
+      id: 'Orthogonal Motion',
+      data: [
+        {
+          x: '12',
+          y: result1,
+        }
+      ],
+      color: 'red',
+    }
+  ]
 }
