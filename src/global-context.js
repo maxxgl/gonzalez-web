@@ -1,4 +1,5 @@
 import React from 'react';
+import kurt from './kurt'
 
 export const Context = React.createContext();
 
@@ -7,13 +8,30 @@ export default class ContextProvider extends React.Component {
     latitude: null,
     longitude: null,
     speed: null,
-    acceleration: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-    // interval: 0,
-    // role: localStorage.getItem('currentRole'),
+    kurt: [
+      {
+        "id": "japan",
+        "color": "hsl(344, 70%, 50%)",
+        "data": [
+          {
+            "x": "plane",
+            "y": 18
+          },
+          {
+            "x": "helicopter",
+            "y": 298
+          },
+          {
+            "x": "boat",
+            "y": 161
+          },
+          {
+            "x": "train",
+            "y": 35
+          },
+        ]
+      },
+    ],
   }
 
   componentDidMount() {
@@ -29,9 +47,10 @@ export default class ContextProvider extends React.Component {
     speed: lastPosition.coords.speed,
   })
 
-  handleDeviceMotion = event => {
-    const a = event.accelerationIncludingGravity
-    this.setState({ acceleration: { x: a.x, y: a.y, z: a.z } })
+  handleDeviceMotion = e => {
+    const data = this.state.kurt
+    const out = kurt(e.accelerationIncludingGravity, e.timestamp, data)
+    this.setState({ kurt: out })
   }
 
   render() {
