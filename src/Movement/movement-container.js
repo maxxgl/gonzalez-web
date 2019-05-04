@@ -7,11 +7,12 @@ export default class Movement extends React.Component {
 
   render() {
     const { kurt } = this.context
+    const arr = Object.values(kurt)
     return (
       <div>
-        {kurt.map(d => <div key={d.id}>{d.id}: {d.data[0].y}</div>)}
+        {arr.map(d => <div key={d.id}>{d.id}: {d.data[0].y}</div>)}
         <div style={{ height: '70vh' }}>
-          <Chart data={kurt} />
+          <Chart data={arr} />
         </div>
       </div>
     )
