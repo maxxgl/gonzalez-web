@@ -6,7 +6,7 @@ export default class Movement extends React.Component {
   static contextType = Context
 
   render() {
-    const { kurt } = this.context
+    const { kurt, pause, paused } = this.context
     const arr = Object.values(kurt)
     return (
       <div>
@@ -14,6 +14,9 @@ export default class Movement extends React.Component {
         <div style={{ height: '70vh' }}>
           <Chart data={arr} />
         </div>
+        <button className="btn btn-float" onClick={pause}>
+          {paused ? 'PLAY' : 'PAUSE'}
+        </button>
       </div>
     )
   }

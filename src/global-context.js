@@ -10,6 +10,7 @@ export default class ContextProvider extends React.Component {
     speed: null,
     kurt: {},
     counter: 0,
+    paused: false,
   }
 
   componentDidMount() {
@@ -25,7 +26,12 @@ export default class ContextProvider extends React.Component {
     speed: lastPosition.coords.speed,
   })
 
+  togglePause = () => this.setState({ paused: !this.state.paused })
+
   handleDeviceMotion = event => {
+    if (this.state.paused) {
+      return
+    }
     const data = Object.assign({}, this.state.kurt)
     const { accelerationIncludingGravity, timeStamp } = event
     const accel = accelerationIncludingGravity
@@ -53,6 +59,7 @@ export default class ContextProvider extends React.Component {
       <Context.Provider
         value={{
           ...this.state,
+          pause: this.togglePause,
         }}
       >
         {this.props.children}
