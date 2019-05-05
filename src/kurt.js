@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 * @param accel: Object with new acceleration data, shape: { x: int, y: int, z: int }
 * @param timestap: timestamp of data point event trigger
