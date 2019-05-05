@@ -43,11 +43,12 @@ const Chart = ({ data }) => (
     axisRight={null}
     axisBottom={null}
     enableGridX={false}
-    colors={{ "scheme": "nivo" }}
+    colors={{ "scheme": "paired" }}
     dotSize={1}
     dotColor={{ "theme": "background" }}
     dotBorderWidth={2}
     dotBorderColor={{ "from": "color" }}
+    animate={false}
     theme={{ textColor: '#eee' }}
   />
 )
