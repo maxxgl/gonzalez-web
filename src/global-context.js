@@ -9,30 +9,7 @@ export default class ContextProvider extends React.Component {
     longitude: null,
     speed: null,
     kurt: {},
-    data: [
-      {
-        "id": "japan",
-        "color": "hsl(344, 70%, 50%)",
-        "data": [
-          {
-            "x": "plane",
-            "y": 18
-          },
-          {
-            "x": "helicopter",
-            "y": 298
-          },
-          {
-            "x": "boat",
-            "y": 161
-          },
-          {
-            "x": "train",
-            "y": 35
-          },
-        ]
-      }
-    ],
+    counter: 0,
   }
 
   componentDidMount() {
@@ -48,11 +25,14 @@ export default class ContextProvider extends React.Component {
     speed: lastPosition.coords.speed,
   })
 
-  handleDeviceMotion = e => {
+  handleDeviceMotion = event => {
     const data = Object.assign({}, this.state.kurt)
-    const out = kurt(e.accelerationIncludingGravity, e.timeStamp, data)
+    const { accelerationIncludingGravity, timeStamp } = event
+    const accel = accelerationIncludingGravity
+    const [out, counter] = kurt(accel, timeStamp, data, this.state.counter)
+
     for (let k of Object.keys(out)) {
-      const newEntry = { x: e.timeStamp, y: out[k] }
+      const newEntry = { x: timeStamp, y: out[k] }
       if (data[k]) {
         if (data[k].data.length > 50) {
           data[k].data.shift()
@@ -65,7 +45,7 @@ export default class ContextProvider extends React.Component {
       }
     }
 
-    this.setState({ kurt: data })
+    this.setState({ kurt: data, counter: counter })
   }
 
   render() {
