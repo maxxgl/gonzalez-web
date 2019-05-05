@@ -28,6 +28,7 @@ export default function(accel, timestamp, log, count) {
   const lastAccelx = xhistory[xhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastxTime = lastAccelx.x
   let lastxValue = lastAccelx.y
+  let filt_accelx = ((accelx - lastxValue)/2) + lastxValue
   
   const lastAccely = yhistory[yhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastyTime = lastAccely.x
@@ -43,6 +44,6 @@ export default function(accel, timestamp, log, count) {
 
   let orthog = Math.pow((Math.pow(accelx, 2) + Math.pow(accely, 2) + Math.pow(accelz, 2)) , 0.5)
 
-  return [{ accelx, accely, accelz, orthog }, newCount]
+  return [{ accelx, accely, accelz, orthog, filt_accelx }, newCount]
 
 }
