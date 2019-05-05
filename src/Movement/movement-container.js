@@ -27,9 +27,9 @@ const Chart = ({ data }) => (
     data={data}
     margin={{
       "top": 25,
-      "bottom": 50,
-      "left": 60,
-      "right": 30,
+      "bottom": 10,
+      "left": 30,
+      "right": 20,
     }}
     xScale={{
       "type": "point"
@@ -41,32 +41,13 @@ const Chart = ({ data }) => (
     }}
     axisTop={null}
     axisRight={null}
-    axisBottom={{
-      "orient": "bottom",
-      "tickSize": 5,
-      "tickPadding": 5,
-      "tickRotation": 0,
-      "legend": "time",
-      "legendOffset": 36,
-      "legendPosition": "middle"
-    }}
-    axisLeft={{
-      "orient": "left",
-      "tickSize": 5,
-      "tickPadding": 5,
-      "tickRotation": 0,
-      "legend": "count",
-      "legendOffset": -40,
-      "legendPosition": "middle"
-    }}
+    axisBottom={null}
+    enableGridX={false}
     colors={{ "scheme": "nivo" }}
     dotSize={1}
     dotColor={{ "theme": "background" }}
     dotBorderWidth={2}
     dotBorderColor={{ "from": "color" }}
-    animate={true}
-    motionStiffness={90}
-    motionDamping={15}
     theme={{ textColor: '#eee' }}
   />
 )
