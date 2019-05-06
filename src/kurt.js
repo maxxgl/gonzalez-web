@@ -24,6 +24,7 @@ export default function(accel, timestamp, log, count) {
   const yhistory = (log.y || { data: [] }).data // Array of past 'y' values ({ x: time, y: value })
   const zhistory = (log.z || { data: [] }).data // Arraz of past 'y' values ({ x: time, y: value })
   const orthoghistory = (log.orthog || { data: [] }).data
+  const filterXHistory = (log.lowPassX || { data: [] }).data
 
   // array access
   const lastAccelx = xhistory[xhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
@@ -39,12 +40,15 @@ export default function(accel, timestamp, log, count) {
   const lastAccelz = zhistory[zhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastzTime = lastAccelz.x
   let lastzValue = lastAccelz.y
-  
 
-
+  const lastFilterX = filterXHistory[filterXHistory.length - 1] || { x: 0, y: 0 }
+  const lowPassX = (accelx - lastFilterX.y) * .5 + lastFilterX.y
 
   let orthog = Math.pow((Math.pow(accelx, 2) + Math.pow(accely, 2) + Math.pow(accelz, 2)) , 0.5)
 
-  return [{ accelx, accely, accelz, orthog, filt_accelx, newCount }, newCount]
+  return [
+    { accelx, accely, accelz, orthog, filt_accelx, newCount, lowPassX },
+    newCount,
+  ]
 
 }
