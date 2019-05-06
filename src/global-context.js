@@ -28,6 +28,12 @@ export default class ContextProvider extends React.Component {
 
   togglePause = () => this.setState({ paused: !this.state.paused })
 
+  togglePrintData = id => {
+    const data = Object.assign({}, this.state.kurt)
+    data[id].show = !data[id].show
+    this.setState({ kurt: data })
+  }
+
   handleDeviceMotion = event => {
     if (this.state.paused) {
       return
@@ -40,14 +46,14 @@ export default class ContextProvider extends React.Component {
     for (let k of Object.keys(out)) {
       const newEntry = { x: timeStamp, y: out[k] }
       if (data[k]) {
-        if (data[k].data.length > 50) {
+        if (data[k].data.length > 75) {
           data[k].data.shift()
           data[k].data.push(newEntry)
         } else {
           data[k].data = [...data[k].data, newEntry]
         }
       } else {
-        data[k] = { id: k, data: [newEntry], color: 'red' }
+        data[k] = { id: k, data: [newEntry], color: 'red', show: false }
       }
     }
 
@@ -60,6 +66,7 @@ export default class ContextProvider extends React.Component {
         value={{
           ...this.state,
           pause: this.togglePause,
+          print: this.togglePrintData,
         }}
       >
         {this.props.children}

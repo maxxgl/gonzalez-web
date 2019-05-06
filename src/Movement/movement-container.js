@@ -1,4 +1,5 @@
 import React from 'react'
+import './movement-style.css'
 import { Context } from '../global-context';
 import { ResponsiveLine } from '@nivo/line'
 
@@ -6,13 +7,13 @@ export default class Movement extends React.Component {
   static contextType = Context
 
   render() {
-    const { kurt, pause, paused } = this.context
+    const { kurt, pause, paused, print } = this.context
     const arr = Object.values(kurt)
     return (
       <div>
-        {arr.map(d => <div key={d.id}>{d.id}: {d.data[d.data.length - 1].y}</div>)}
+        {arr.map(d => <Data key={d.id} {...d} print={print} />)}
         <div style={{ height: '70vh' }}>
-          <Chart data={arr} />
+          <Chart data={arr.filter(v => v.show)} />
         </div>
         <button className="btn btn-float" onClick={pause}>
           {paused ? 'PLAY' : 'PAUSE'}
@@ -21,6 +22,20 @@ export default class Movement extends React.Component {
     )
   }
 }
+
+const Data = ({ id, data, show, print }) => (
+  <div className={"movement-datafield" + (show ? " active" : "")}>
+    <div>{id}: </div>
+    <div>{data[data.length - 1].y}</div>
+    <label className="switch">
+      <input type="checkbox"
+        checked={show}
+        onClick={() => print(id)}
+      />
+      <span className="slider round"></span>
+    </label>
+  </div>
+)
 
 const Chart = ({ data }) => (
   <ResponsiveLine
