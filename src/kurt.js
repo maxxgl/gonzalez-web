@@ -49,8 +49,7 @@ export default function(accel, timestamp, log, count) {
   const lastFilterZ = filterZHistory[filterZHistory.length - 1] || { x: 0, y: 0 }
   const lowPassZ = (accelz - lastFilterZ.y) * 0.1 + lastFilterZ.y
 
-  //let orthog = Math.pow((Math.pow(lowPassX, 2) + Math.pow(lowPassY, 2) + Math.pow(lowPassZ, 2)) , 0.5)
-  let orthog = 1
+  let orthog = Math.pow((Math.pow(lowPassX, 2) + Math.pow(lowPassY, 2) + Math.pow(lowPassZ, 2)) , 0.5)
   
   return [
     { accelx, accely, accelz, orthog, newCount, lowPassX, lowPassY, lowPassZ },
