@@ -11,7 +11,7 @@ export default function(accel, timestamp, log, count) {
 //timestamp available
 
   let newCount = count + 0.1
-  if (newCount > 10) {
+  if (newCount > 1) {
     newCount = 0
   }
 
