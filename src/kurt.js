@@ -25,29 +25,34 @@ export default function(accel, timestamp, log, count) {
   const zhistory = (log.z || { data: [] }).data // Arraz of past 'y' values ({ x: time, y: value })
   const orthoghistory = (log.orthog || { data: [] }).data
   const filterXHistory = (log.lowPassX || { data: [] }).data
+  const filterYHistory = (log.lowPassY || { data: [] }).data
+  const filterZHistory = (log.lowPassZ || { data: [] }).data
 
   // array access
   const lastAccelx = xhistory[xhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastxTime = lastAccelx.x
   let lastxValue = lastAccelx.y
-  let filt_accelx = ((accelx - lastxValue)/2) + lastxValue
   
   const lastAccely = yhistory[yhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastyTime = lastAccely.x
   let lastyValue = lastAccely.y
-  //let filt_accely = ((accely * 0.1) + lastyValue)
   
   const lastAccelz = zhistory[zhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
   let lastzTime = lastAccelz.x
   let lastzValue = lastAccelz.y
 
+  // low pass filter
   const lastFilterX = filterXHistory[filterXHistory.length - 1] || { x: 0, y: 0 }
   const lowPassX = (accelx - lastFilterX.y) * 0.1 + lastFilterX.y
+  const lastFilterY = filterYHistory[filterYHistory.length - 1] || { x: 0, y: 0 }
+  const lowPassY = (accely - lastFilterY.y) * 0.1 + lastFilterY.y
+  const lastFilterZ = filterZHistory[filterZHistory.length - 1] || { x: 0, y: 0 }
+  const lowPassZ = (accelz - lastFilterZ.y) * 0.1 + lastFilterZ.y
 
-  let orthog = Math.pow((Math.pow(accelx, 2) + Math.pow(accely, 2) + Math.pow(accelz, 2)) , 0.5)
+  let orthog = Math.pow((Math.pow(lowPassX, 2) + Math.pow(lowPassY, 2) + Math.pow(lowPassZ, 2)) , 0.5)
 
   return [
-    { accelx, accely, accelz, orthog, filt_accelx, newCount, lowPassX },
+    { accelx, accely, accelz, orthog, newCount, lowPassX, lowPassY, lowPassZ },
     newCount,
   ]
 
