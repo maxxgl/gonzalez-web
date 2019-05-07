@@ -42,7 +42,7 @@ export default function(accel, timestamp, log, count) {
   let lastzValue = lastAccelz.y
 
   const lastFilterX = filterXHistory[filterXHistory.length - 1] || { x: 0, y: 0 }
-  const lowPassX = (accelx - lastFilterX.y) * .5 + lastFilterX.y
+  const lowPassX = (accelx - lastFilterX.y) * 0.1 + lastFilterX.y
 
   let orthog = Math.pow((Math.pow(accelx, 2) + Math.pow(accely, 2) + Math.pow(accelz, 2)) , 0.5)
 
