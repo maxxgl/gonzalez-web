@@ -5,7 +5,7 @@
 * @param log: Historical output objects, shape: { key: { x: time, y: value } }
 * @param counter: int
 */
-export default function(accel, timestamp, log, count) {
+export default function(accel, rotation, timestamp, log, count) {
 //accelx... are defined
 //log.x,y,z,
 //timestamp available
@@ -18,6 +18,9 @@ export default function(accel, timestamp, log, count) {
   let accelx = accel.x
   let accely = accel.y
   let accelz = accel.z
+  let alpha = rotation.alpha
+  let beta = rotation.beta
+  let gamma = rotation.gamma
 
   // Destructure of historical data
   const xhistory = (log.x || { data: [] }).data // Array of past 'x' values ({ x: time, y: value })
@@ -52,7 +55,19 @@ export default function(accel, timestamp, log, count) {
   let orthog = Math.pow((Math.pow(lowPassX, 2) + Math.pow(lowPassY, 2) + Math.pow(lowPassZ, 2)) , 0.5)
   
   return [
-    { accelx, accely, accelz, orthog, newCount, lowPassX, lowPassY, lowPassZ },
+    {
+      accelx,
+      accely,
+      accelz,
+      orthog,
+      newCount,
+      lowPassX,
+      lowPassY,
+      lowPassZ,
+      alpha,
+      beta,
+      gamma,
+    },
     newCount,
   ]
 
