@@ -71,7 +71,7 @@ export default function(accel, rotation, timestamp, log, count) {
   const low_Pass_gamma = (gamma - last_filter_gamma.y) * 0.1 + last_filter_gamma.y
   
   // plotting gains and offsets
-  let orthog_plot = orthog*10 - 100
+  let orthog_plot = (orthog - 9.81) * 10
   let alpha_plot = low_Pass_alpha/10
   let beta_plot = low_Pass_beta/10
   let gamma_plot = low_Pass_gamma/10
@@ -87,11 +87,11 @@ export default function(accel, rotation, timestamp, log, count) {
       lowPassY,
       lowPassZ,
       alpha,
-      low_Pass_alpha,
+      alpha_plot,
       beta,
-      low_Pass_beta,
+      beta_plot,
       gamma,
-      low_Pass_gamma,
+      gamma_plot,
     },
     newCount,
   ]
