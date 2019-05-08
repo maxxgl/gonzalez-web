@@ -11,7 +11,7 @@ export default function(accel, rotation, timestamp, log, count) {
 //timestamp available
 
   let newCount = count + 0.1
-  if (newCount > 1) {
+  if (newCount > 1.6) {
     newCount = 0
   }
 
@@ -35,10 +35,10 @@ export default function(accel, rotation, timestamp, log, count) {
   
   const alpha_history = (log.alpha || { data: [] }).data
   const filter_alpha_history = (log.low_Pass_alpha || { data: [] }).data
+  /*
   const beta_history = (log.beta || { data: [] }).data
   const filter_beta_history = (log.low_Pass_beta || { data: [] }).data
-  const gamma_history = (log.gamma || { data: [] }).data
-  const filter_gamma_history = (log.low_Pass_gamma || { data: [] }).data
+  */
 
   // array access
   const lastAccelx = xhistory[xhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
@@ -65,11 +65,9 @@ export default function(accel, rotation, timestamp, log, count) {
   
   const last_filter_alpha = filter_alpha_history[filter_alpha_history.length - 1] || { x: 0, y: 0 }
   const low_Pass_alpha = (alpha - last_filter_alpha.y) * 0.1 + last_filter_alpha.y
-  const last_filter_beta = filter_beta_history[filter_beta_history.length - 1] || { x: 0, y: 0 }
-  const low_Pass_beta = (beta - last_filter_beta.y) * 0.1 + last_filter_beta.y
-  const last_filter_gamma = filter_gamma_history[filter_gamma_history.length - 1] || { x: 0, y: 0 }
-  const low_Pass_gamma = (gamma - last_filter_gamma.y) * 0.1 + last_filter_gamma.y
-
+  //const last_filter_beta = filter_beta_history[filter_beta_history.length - 1] || { x: 0, y: 0 }
+  //const low_Pass_beta = (beta - last_filter_beta.y) * 0.1 + last_filter_beta.y
+  
   return [
     {
       accelx,
@@ -83,9 +81,7 @@ export default function(accel, rotation, timestamp, log, count) {
       alpha,
       low_Pass_alpha,
       beta,
-      low_Pass_beta
       gamma,
-      low_Pass_gamma
     },
     newCount,
   ]
