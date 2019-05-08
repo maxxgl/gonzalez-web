@@ -81,7 +81,7 @@ export default function(accel, rotation, timestamp, log, count) {
       accelx,
       accely,
       accelz,
-      orthog,
+      orthog_plot,
       newCount,
       lowPassX,
       lowPassY,
