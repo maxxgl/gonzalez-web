@@ -11,7 +11,7 @@ export default function(accel, rotation, timestamp, log, count) {
 //timestamp available
 
   let newCount = count + 0.1
-  if (newCount > 1.6) {
+  if (newCount > 2.0) {
     newCount = 0
   }
 
@@ -75,17 +75,17 @@ export default function(accel, rotation, timestamp, log, count) {
       accelx,
       accely,
       accelz,
-      orthog,
+      orthog*10 - 100,
       newCount,
       lowPassX,
       lowPassY,
       lowPassZ,
       alpha,
-      low_Pass_alpha,
+      low_Pass_alpha/10,
       beta,
-      low_Pass_beta,
+      low_Pass_beta/10,
       gamma,
-      low_Pass_gamma,
+      low_Pass_gamma/10,
     },
     newCount,
   ]
