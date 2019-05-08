@@ -39,9 +39,9 @@ export default class ContextProvider extends React.Component {
       return
     }
     const data = Object.assign({}, this.state.kurt)
-    const { accelerationIncludingGravity, timeStamp } = event
+    const { accelerationIncludingGravity, rotationRate, timeStamp } = event
     const accel = accelerationIncludingGravity
-    const [out, counter] = kurt(accel, timeStamp, data, this.state.counter)
+    const [out, counter] = kurt(accel, rotationRate, timeStamp, data, this.state.counter)
 
     for (let k of Object.keys(out)) {
       const newEntry = { x: timeStamp, y: out[k] }
