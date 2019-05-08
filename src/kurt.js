@@ -26,10 +26,15 @@ export default function(accel, rotation, timestamp, log, count) {
   const xhistory = (log.x || { data: [] }).data // Array of past 'x' values ({ x: time, y: value })
   const yhistory = (log.y || { data: [] }).data // Array of past 'y' values ({ x: time, y: value })
   const zhistory = (log.z || { data: [] }).data // Arraz of past 'y' values ({ x: time, y: value })
-  const orthoghistory = (log.orthog || { data: [] }).data
+  
   const filterXHistory = (log.lowPassX || { data: [] }).data
   const filterYHistory = (log.lowPassY || { data: [] }).data
   const filterZHistory = (log.lowPassZ || { data: [] }).data
+  
+  const orthoghistory = (log.orthog || { data: [] }).data
+  
+  const alpha_history = (log.alpha || { data: [] }).data
+  const filter_alpha_history = (log.low_Pass_alpha || { data: [] }).data
 
   // array access
   const lastAccelx = xhistory[xhistory.length - 1] || { x: 0, y: 0 } // most recent data of 'x'
@@ -54,6 +59,9 @@ export default function(accel, rotation, timestamp, log, count) {
 
   let orthog = Math.pow((Math.pow(lowPassX, 2) + Math.pow(lowPassY, 2) + Math.pow(lowPassZ, 2)) , 0.5)
   
+  const last_filter_alpha = filter_alpha_history[filter_alpha_history.length - 1] || { x: 0, y: 0 }
+  const low_Pass_alpha = (alpha - last_filter_alpha.y) * 0.1 + last_filter_alpha.y
+
   return [
     {
       accelx,
@@ -65,6 +73,7 @@ export default function(accel, rotation, timestamp, log, count) {
       lowPassY,
       lowPassZ,
       alpha,
+      low_Pass_alpha,
       beta,
       gamma,
     },
