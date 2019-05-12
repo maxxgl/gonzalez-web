@@ -30,7 +30,7 @@ const Data = ({ id, data, show, print }) => (
     <label className="switch">
       <input type="checkbox"
         checked={show}
-        onClick={() => print(id)}
+        onChange={() => print(id)}
       />
       <span className="slider round"></span>
     </label>
