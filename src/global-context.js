@@ -9,7 +9,7 @@ export default class ContextProvider extends React.Component {
     longitude: null,
     speed: null,
     kurt: {},
-    counter: 0,
+    counter: [],
     paused: false,
   }
 

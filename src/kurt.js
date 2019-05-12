@@ -10,9 +10,9 @@ export default function(accel, rotation, timestamp, log, count) {
 //log.x,y,z,
 //timestamp available
 
-  let newCount = count + 0.1
-  if (newCount > 2.0) {
-    newCount = 0
+  let newCount = [(count[0] || 0) + 0.1]
+  if (newCount[0] > 10) {
+    newCount[0] = 0
   }
 
   let accelx = accel.x
