@@ -1,20 +1,33 @@
 .App {
-    padding: 1em;
     background-color: #002b36;
-    min-height: calc(100vh - 2em);
+    min-height: 100vh;
     color: white;
+}
+
+main {
+    padding: 1em;
 }
 
 nav {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 nav > * {
+    flex: 1;
+    text-align: center;
     color: white;
+    background-color: grey;
+    padding: .5em;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-nav > *.active > button {
+nav > *:not(:last-child) {
+    border-right: 1px solid dimgray;
+}
+
+nav > *.active {
     background-color: seagreen;
 }
 
