@@ -15,9 +15,9 @@ export default function(accel, rotation, location, timestamp, log, count) {
     newCount[0] = 0
   }
 
-  let accelx = accel.x
-  let accely = accel.y
-  let accelz = accel.z
+  let accelx = accel.x || 0
+  let accely = accel.y || 0
+  let accelz = accel.z || 0
   let alpha = rotation.alpha
   let beta = rotation.beta
   let gamma = rotation.gamma
