@@ -4,10 +4,6 @@
     color: white;
 }
 
-main {
-    padding: 1em;
-}
-
 nav {
     display: flex;
     /* justify-content: space-around; */
@@ -32,5 +28,5 @@ nav > *.active {
 }
 
 main {
-    margin: 1em 0;
+    padding: 1em;
 }
