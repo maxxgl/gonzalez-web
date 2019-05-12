@@ -76,7 +76,7 @@ const Display = ({ kurt }) => {
             {
               id: "neg-speed",
               label: "",
-              value: (180 - orthogValue),
+              value: (30 - orthogValue),
             },
           ]}
           startAngle={-90}
