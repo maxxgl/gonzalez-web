@@ -8,6 +8,7 @@ export default class ContextProvider extends React.Component {
     latitude: null,
     longitude: null,
     speed: null,
+    motion: {},
     kurt: {},
     counter: [],
     paused: false,
@@ -16,7 +17,8 @@ export default class ContextProvider extends React.Component {
   componentDidMount() {
     let options = { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
     navigator.geolocation.watchPosition(this.watcher, this.alertError, options);
-    window.addEventListener('devicemotion', this.handleDeviceMotion, true);
+    window.addEventListener('devicemotion', this.motionWatcher, true);
+    setInterval(() => this.loop(this.state), 30);
   }
 
   alertError = err => alert(JSON.stringify(err));
@@ -25,6 +27,7 @@ export default class ContextProvider extends React.Component {
     longitude: lastPosition.coords.longitude,
     speed: lastPosition.coords.speed,
   })
+  motionWatcher = motion => this.setState({ motion })
 
   togglePause = () => this.setState({ paused: !this.state.paused })
 
@@ -34,14 +37,22 @@ export default class ContextProvider extends React.Component {
     this.setState({ kurt: data })
   }
 
-  handleDeviceMotion = event => {
-    if (this.state.paused) {
-      return
-    }
-    const data = Object.assign({}, this.state.kurt)
-    const { accelerationIncludingGravity, rotationRate, timeStamp } = event
+  loop = sample => {
+    if (sample.paused) return
+    const data = Object.assign({}, sample.kurt)
+    const {
+      accelerationIncludingGravity = {},
+      rotationRate = {},
+      timeStamp = 0,
+    } = sample.motion
     const accel = accelerationIncludingGravity
-    const [out, counter] = kurt(accel, rotationRate, timeStamp, data, this.state.counter)
+    const location = {
+      latitude: sample.latitude,
+      longitude: sample.longitude,
+      speed: sample.speed,
+    }
+
+    const [out, counter] = kurt(accel, rotationRate, location, timeStamp, data, sample.counter)
 
     for (let k of Object.keys(out)) {
       const newEntry = { x: timeStamp, y: out[k] }
